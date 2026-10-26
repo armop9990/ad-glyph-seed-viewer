@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%B7%3C/text%3E%3C/svg%3E">
+<title>Antimatter Dimensions Glyph seed viewer</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+color-scheme:dark;--h:258;--l:40;--l2:40;--bg:hsl(var(--h) 34% calc(var(--l) * 1%));--surface:hsl(var(--h) 45% 14%);--ink:#fff;--muted:hsl(var(--h) 40% 96%);--line:hsl(var(--h) 35% 62% / .5);--accent:hsl(var(--h) 94% 80%);
+--power:#22aa48;--infinity:#ff9a1f;--replication:#2aa8ff;--time:#c26bff;--dilation:#84e91a;
+--common:#ffffff;--uncommon:#43a047;--rare:#5096f3;--epic:#9c27b0;--legendary:#ff9800;--mythical:#d50000;--transcendent:#03ffec;--celestial:#3d3dec}
+
+
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;position:relative;min-height:100vh;background:var(--bg) linear-gradient(160deg,hsl(var(--h) 34% calc(var(--l) * 1%)) 0%,hsl(calc(var(--h) + 45) 34% calc(var(--l2) * 1%)) 100%);background:var(--bg) linear-gradient(160deg in oklab,hsl(var(--h) 34% calc(var(--l) * 1%)) 0%,hsl(calc(var(--h) + 45) 34% calc(var(--l2) * 1%)) 100%);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{position:relative;z-index:1;max-width:1040px;margin:0 auto;padding:40px 20px 100px}
+h1{font:700 clamp(1.7rem,4.5vw,2.5rem)/1.12 Georgia,"Iowan Old Style",serif;margin:0 0 24px;letter-spacing:-.01em}
+.lead{max-width:62ch;color:var(--muted);margin:0 0 24px}
+form{display:flex;flex-wrap:wrap;gap:10px;align-items:end;margin-bottom:8px}
+label{display:grid;gap:4px;font-weight:600;font-size:.92rem;flex:1 1 280px}
+input{font:inherit;font-variant-numeric:tabular-nums;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-width:0}
+button{font:inherit;font-weight:600;padding:11px 20px;border:0;border-radius:8px;background:var(--accent);color:#1a0b3d;cursor:pointer}
+
+input:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+#msg{min-height:1.4em;margin:4px 0 12px;color:#ff5c5c;font-weight:600;font-size:.92rem}
+details{color:var(--muted);font-size:.92rem;max-width:72ch;margin-bottom:28px}summary{cursor:pointer;color:var(--ink);font-weight:600}
+details p{margin:8px 0 0}code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.88em}
+.how{margin:0 0 18px;padding-left:1.3rem;color:var(--muted);font-size:.92rem}.how li{margin:2px 0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:hsl(var(--h) 34% calc(var(--l) * 1%))}
+.deco{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;user-select:none}
+.deco span{position:absolute;line-height:1;font-weight:700;color:rgba(255,255,255,.07);will-change:transform;animation:drift var(--dur,260s) ease-in-out infinite alternate}
+@keyframes drift{from{transform:translate(0,0) rotate(var(--r0,0deg))}to{transform:translate(var(--dx,6vmin),var(--dy,8vmin)) rotate(var(--r1,6deg))}}
+@media (prefers-reduced-motion:reduce){.deco span{animation:none;transform:rotate(var(--r0,0deg))}}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:12px;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:rgba(12,9,26,.92);border-top:1px solid var(--line);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.bar label{flex:none;display:block;font-size:.92rem}.bar small{color:var(--muted);font-size:.8rem;max-width:34ch}.bar input{width:130px;padding:8px 10px;text-align:center}
+.hue{-webkit-appearance:none;appearance:none;display:block;width:150px;height:6px;padding:0;margin:0 0 16px auto;border:0;border-radius:3px;background:linear-gradient(90deg,hsl(0 70% 50%),hsl(60 70% 50%),hsl(120 70% 50%),hsl(180 70% 50%),hsl(240 70% 50%),hsl(300 70% 50%),hsl(360 70% 50%));opacity:.02;transition:opacity .2s;cursor:pointer}.hue:hover,.hue:focus-visible{opacity:1}.hue::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:14px;border-radius:50%;background:#fff;border:2px solid #000}.hue::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:#fff;border:2px solid #000}
+.reality{border-top:1px solid var(--line);padding:18px 0 14px}
+.rhead{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 14px;margin-bottom:12px}
+.rhead h2{font-size:1.05rem;margin:0}.rhead span{color:var(--muted);font-size:.9rem}
+.seed{font:.78rem ui-monospace,Menlo,Consolas,monospace;overflow-wrap:anywhere}.gauss{margin-left:auto}
+.glyphs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr));gap:20px 24px}
+.glyph{display:grid;grid-template-columns:1fr auto 1fr;grid-template-rows:1fr 1fr;gap:6px 12px}.glyph .mid{grid-area:1/2/3/3;display:flex;flex-direction:column;align-items:center;text-align:center}.s{font-size:.84rem;line-height:1.25}.s0,.s1{grid-column:1;text-align:right}.s2,.s3{grid-column:3;text-align:left}.s0,.s2{grid-row:1;align-self:start}.s1,.s3{grid-row:2;align-self:end}
+.hex{flex:none;width:72px;height:72px;display:grid;place-items:center;border-radius:50%;background:#000;border:2px solid var(--r);box-shadow:0 0 9px var(--r),inset 0 0 14px var(--r)}
+.hex>span{display:flex;flex-direction:column;align-items:center;justify-content:center}
+.hex i{font-style:normal;font-weight:700;font-size:1.8rem;line-height:1;color:var(--t);position:relative;top:5px;display:inline-block;text-shadow:0 0 6px var(--t)}.hex b{color:#e9e4f7;font-size:.6rem;line-height:1.2;position:relative;top:4px}.d{position:absolute;width:4px;height:4px;border-radius:50%;background:var(--t);box-shadow:0 0 4px var(--t);text-decoration:none}.d0{left:-9px;top:-2px}.d1{left:-9px;bottom:-2px}.d2{right:-9px;top:-2px}.d3{right:-9px;bottom:-2px}.hex.replication .d0{left:-12px;top:-5px}.hex.replication .d1{left:-12px;bottom:-5px}.hex.replication .d2{right:-12px;top:-5px}.hex.replication .d3{right:-12px;bottom:-5px}
+.gn{margin-top:6px;line-height:1.25}.gn b{display:block}.gn small{display:block;color:var(--muted);font-size:.8rem}
+
+.link{background:none;color:var(--accent);padding:6px 0;border:0;font-weight:600}.link::after{content:"▾";display:inline-block;margin-left:6px;transition:transform .25s}.link[aria-expanded="true"]::after{transform:rotate(180deg)}
+.panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .25s ease}.panel.open{grid-template-rows:1fr}.panel>.inner{overflow:hidden;min-height:0;visibility:hidden;transition:visibility .25s}.panel.open>.inner{visibility:visible}
+.opts{display:flex;flex-wrap:wrap;align-items:flex-start;gap:6px 48px;padding:6px 0 14px}.opt{display:flex;flex:none;align-items:center;gap:10px;font-weight:400}.opt input{width:18px;height:18px;padding:0;accent-color:var(--accent)}
+.grp{display:flex;flex-direction:column;gap:2px}#oFrom{width:64px;height:auto;padding:4px 6px;text-align:center}.s.perm{color:#4ade80;font-weight:600}.d.perm{background:#4ade80;box-shadow:0 0 4px #4ade80}.s.bust{color:#ff6b6b}.d.bust{background:#ff4d4d;box-shadow:0 0 4px #ff4d4d}
+.s.pow{color:#facc15}.d.pow{background:#facc15;box-shadow:0 0 4px #facc15}
+.s0,.s1{justify-self:end}.s2,.s3{justify-self:start}
+.s.perm.pow{background:linear-gradient(90deg,#4ade80 50%,#facc15 50%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.d.perm.pow{background:linear-gradient(90deg,#4ade80 50%,#facc15 50%);box-shadow:0 0 4px #facc15}
+@media (prefers-reduced-motion:reduce){.panel,.panel>.inner,.link::after{transition:none}}
+</style>
+</head>
+<body>
+<div class="deco" aria-hidden="true"></div>
+<main>
+<input type="range" class="hue" id="hue" min="0" max="360" value="258" aria-label="Page color">
+<h1>Antimatter Dimensions Glyph seed viewer</h1>
+<ol class="how"><li>Open Antimatter Dimensions in your browser and press F12 to open the console.</li><li>Type <code>player.reality.initialSeed</code> and press Enter.</li><li>Paste the number below.</li></ol>
+<form id="f" novalidate>
+<label>Initial seed<input id="seed" inputmode="numeric" autocomplete="off" placeholder="For example, 1789234567891"></label>
+<button type="submit">Show glyphs</button>
+</form>
+<div id="msg" role="alert"></div>
+<button type="button" class="link" id="advBtn" aria-expanded="false" aria-controls="advPanel">Advanced options</button>
+<div class="panel" id="advPanel"><div class="inner"><div class="opts">
+<div class="grp"><label class="opt"><input type="checkbox" id="oPerm">Highlight permutations</label>
+<label class="opt"><input type="checkbox" id="oBust">Show busted effects</label>
+<label class="opt"><input type="checkbox" id="oGuar">Highlight guaranteed effects</label></div>
+<div class="grp"><label class="opt"><input type="checkbox" id="oRU17">Duplicity of Potency (RU17)</label>
+<label class="opt"><input type="checkbox" id="oRU16">Disparity of Rarity (RU16)</label>
+<label class="opt">Disparity owned from Reality <input type="number" id="oFrom" min="1" max="21" step="1" value="1"></label></div>
+</div></div></div>
+<div id="out"></div>
+
+</main>
+<div class="bar"><label for="lvl">Glyph level</label><input id="lvl" type="number" inputmode="numeric" min="1" max="1000000" step="1" value="1"><small>Below 1 or not a whole number becomes 1. Above 1,000,000 becomes 1,000,000.</small></div>
+<script>
+let GLYPH_LEVEL = 1;
+const DISPARITY = 1.3;
+let STRENGTH_MULT = 1;
+let DISPARITY_FROM = Infinity;
+let RU17_FROM = Infinity;
+let RU17_ACTIVE = false;
+const RU17_CHANCE = 0.5;
+let MAX_EFFECTS = 2;
+
+const BASIC_TYPES = ["power", "infinity", "replication", "time", "dilation"];
+const START_ID = [16, 12, 8, 0, 4];
+const DIM_POWER_IDX = [0, 12, 16];
+const DIM_POWER_BY_TYPE = { power: 16, infinity: 12, time: 0 };
+
+const EFFECT_NAMES = {
+  0: "timepow", 1: "timespeed", 2: "timeetermult", 3: "timeEP",
+  4: "dilationDT", 5: "dilationgalaxyThreshold", 6: "dilationTTgen", 7: "dilationpow",
+  8: "replicationspeed", 9: "replicationpow", 10: "replicationdtgain", 11: "replicationglyphlevel",
+  12: "infinitypow", 13: "infinityrate", 14: "infinityIP", 15: "infinityinfmult",
+  16: "powerpow", 17: "powermult", 18: "powerdimboost", 19: "powerbuy10",
+};
+const effectLabel = (i) => `${EFFECT_NAMES[i]}[${i}]`;
+
+const ORDERED_EFFECT_LIST = [
+  "powerpow", "infinitypow", "replicationpow", "timepow", "dilationpow", "timeshardpow", "powermult",
+  "powerdimboost", "powerbuy10", "dilationTTgen", "infinityinfmult", "infinityIP", "timeEP", "dilationDT",
+  "replicationdtgain", "replicationspeed", "timeetermult", "dilationgalaxyThreshold", "infinityrate",
+  "replicationglyphlevel", "timespeed",
+];
+const orderRank = (idx) => ORDERED_EFFECT_LIST.indexOf(EFFECT_NAMES[idx]);
+
+const strengthToRarity = (x) => ((x - 1) * 100) / 2.5;
+const RARITY_TIERS = [
+  [3.5, "Celestial"], [3.25, "Transcendent"], [3, "Mythical"], [2.75, "Legendary"],
+  [2.5, "Epic"], [2, "Rare"], [1.5, "Uncommon"], [1, "Common"],
+];
+const rarityName = (strength) => (RARITY_TIERS.find(([min]) => strength >= min) ?? [0, "Below Common"])[1];
+const formatRarity = (strength) => {
+  const r = strengthToRarity(strength);
+  return `${r.toFixed(r.toFixed(1).endsWith(".0") ? 0 : 1)}%`;
+};
+
+const bitsOf = (mask) => Object.keys(EFFECT_NAMES).map(Number).filter((i) => mask & (1 << i));
+const countBits = (mask) => bitsOf(mask).length;
+
+function xorshift32Update(state) {
+  state ^= state << 13;
+  state ^= state >>> 17;
+  state ^= state << 5;
+  return state;
+}
+
+function permutationIndex(len, lexIndex) {
+  let numPerm = 1;
+  for (let n = 1; n <= len; n++) numPerm *= n;
+  let index = lexIndex % numPerm;
+  let remOrder = numPerm / len;
+  const ordered = Array.from({ length: len }, (_, i) => i);
+  const perm = [];
+  while (ordered.length > 0) {
+    const div = Math.floor(index / remOrder);
+    const rem = index % remOrder;
+    perm.push(ordered.splice(div, 1)[0]);
+    index = rem;
+    remOrder /= ordered.length;
+  }
+  return perm;
+}
+
+const SECOND_GAUSSIAN_DEFAULT = 1e6;
+class GlyphRNG {
+  constructor(seed) {
+    if ((seed | 0) === 0) throw new Error("Invalid seed: it is 0 in 32-bit arithmetic, which hangs the game's RNG");
+    this.seed = seed;
+    this.secondGaussian = SECOND_GAUSSIAN_DEFAULT;
+  }
+
+  uniform() {
+    const state = xorshift32Update(this.seed);
+    this.seed = state;
+    return state * 2.3283064365386963e-10 + 0.5;
+  }
+
+  normal() {
+    if (this.secondGaussian !== SECOND_GAUSSIAN_DEFAULT) {
+      const toReturn = this.secondGaussian;
+      this.secondGaussian = SECOND_GAUSSIAN_DEFAULT;
+      return toReturn;
+    }
+    let u = 0, v = 0, s = 0;
+    do {
+      u = this.uniform() * 2 - 1;
+      v = this.uniform() * 2 - 1;
+      s = u * u + v * v;
+    } while (s >= 1 || s === 0);
+    s = Math.sqrt(-2 * Math.log(s) / s);
+    this.secondGaussian = v * s;
+    return u * s;
+  }
+}
+
+function gaussianBellCurve(rng) {
+  const x = Math.sqrt(Math.abs(rng.normal()) + 1);
+  return -0.111749606737000 + x * (0.900603878243551 + x * (0.229108274476697 + x * -0.017962545983249));
+}
+
+function randomStrength(rng) {
+  let result = gaussianBellCurve(rng) * STRENGTH_MULT;
+  const relicShardFactor = rng.uniform();
+  const increasedRarity = relicShardFactor * 0 + 0;
+  result += increasedRarity / 40;
+  result = Math.ceil(result * 400) / 400;
+  return Math.min(result, 3.5);
+}
+
+function randomGlyphEffects(typeIdx, rng) {
+  const strength = randomStrength(rng);
+  const random1 = rng.uniform();
+  const random2 = rng.uniform();
+  let num = Math.min(4, Math.floor(Math.pow(random1, 1 - Math.sqrt(GLYPH_LEVEL * strength) / 100) * 1.5 + 1));
+  if (RU17_ACTIVE && random2 < RU17_CHANCE) num = Math.min(num + 1, 4);
+  const values = [0, 1, 2, 3].map((k) => ({ idx: START_ID[typeIdx] + k, v: rng.uniform() }));
+  for (let k = 0; k < 3; k++) rng.uniform();
+  for (const e of values) if (DIM_POWER_IDX.includes(e.idx)) e.v = 2;
+  values.sort((a, b) => b.v - a.v);
+  return { mask: values.slice(0, num).reduce((m, e) => m | (1 << e.idx), 0), strength };
+}
+
+function simulateRealities(initSeed) {
+  const rng = new GlyphRNG(initSeed);
+  const results = [{ reality: 1, fixed: { type: "power", effects: [16], strength: 1.5 }, seedAfter: rng.seed }];
+
+  for (let realityCount = 1; realityCount <= 20; realityCount++) {
+    STRENGTH_MULT = realityCount + 1 >= DISPARITY_FROM ? DISPARITY : 1;
+    RU17_ACTIVE = realityCount + 1 >= RU17_FROM;
+    MAX_EFFECTS = RU17_ACTIVE ? 3 : 2;
+    const groupNum = Math.floor((realityCount - 1) / 5);
+    const groupIndex = (realityCount - 1) % 5;
+    const seedBefore = rng.seed;
+    const gaussBefore = rng.secondGaussian;
+    const typePerm = permutationIndex(5, (31 + (initSeed % 7)) * groupNum + (initSeed % 1123));
+
+    const typePermIndex = [0, 0, 0, 0, 0];
+    for (let i = 0; i < groupIndex; i++) {
+      for (let t = 0; t < 5; t++) if (t !== typePerm[i]) typePermIndex[t]++;
+    }
+
+    const typesThisReality = [0, 1, 2, 3, 4];
+    typesThisReality.splice(typePerm[groupIndex], 1);
+
+    const uniformEffects = typesThisReality.map((type) => {
+      const effectPerm = permutationIndex(4, 5 * type + (7 + (initSeed % 5)) * groupNum + (initSeed % 11));
+      return START_ID[type] + effectPerm[typePermIndex[type]];
+    });
+
+    const glyphs = typesThisReality.map((typeIdx, i) => {
+      const { mask: rolled, strength } = randomGlyphEffects(typeIdx, rng);
+      const replaceMode = (initSeed + realityCount + i) % 2 === 0;
+      const newMask = replaceMode ? (1 << uniformEffects[i]) : (rolled | (1 << uniformEffects[i]));
+      let effects;
+      if (countBits(newMask) > MAX_EFFECTS) {
+        const replaceable = bitsOf(rolled)
+          .filter((e) => !DIM_POWER_IDX.includes(e))
+          .sort((a, b) => orderRank(a) - orderRank(b));
+        const toRemove = replaceable[Math.abs(initSeed + realityCount) % replaceable.length];
+        effects = newMask & ~(1 << toRemove);
+      } else {
+        effects = newMask;
+      }
+      const type = BASIC_TYPES[typeIdx];
+      if (DIM_POWER_BY_TYPE[type] !== undefined) effects |= 1 << DIM_POWER_BY_TYPE[type];
+      return {
+        type,
+        guaranteed: uniformEffects[i],
+        mode: replaceMode ? "replace" : "add",
+        effects: bitsOf(effects),
+        busted: bitsOf(rolled).filter((e) => !(effects & (1 << e))),
+        strength,
+        boosted: false,
+      };
+    });
+
+    const pick = rng.uniform();
+    let newStrength;
+    do { newStrength = randomStrength(rng); } while (newStrength < 1.5);
+    if (!glyphs.some((g) => g.strength >= 1.5)) {
+      const chosen = glyphs[Math.floor(pick * glyphs.length)];
+      chosen.strength = newStrength;
+      chosen.boosted = true;
+    }
+    for (const g of glyphs) {
+      g.rarityPercent = strengthToRarity(g.strength);
+      g.rarityText = formatRarity(g.strength);
+      g.rarityName = rarityName(g.strength);
+    }
+
+    results.push({
+      reality: realityCount + 1,
+      excluded: BASIC_TYPES[typePerm[groupIndex]],
+      glyphs,
+      seedBefore,
+      gaussBefore,
+      seedAfter: rng.seed,
+    });
+  }
+  return results;
+}
+
+function analyzeReality(initSeed, realityNumber) {
+  return simulateRealities(initSeed)[realityNumber - 1] ?? null;
+}
+
+function firstRealities(initSeed) {
+  return simulateRealities(initSeed);
+}
+
+const LABELS = {
+  timepow: "Time Dimension power", timespeed: "Game speed", timeetermult: "Eternity gain", timeEP: "Eternity Point gain",
+  dilationDT: "Dilated Time gain", dilationgalaxyThreshold: "Tachyon Galaxy threshold", dilationTTgen: "Time Theorem generation",
+  dilationpow: "Antimatter Dimension power while Dilated", replicationspeed: "Replication speed",
+  replicationpow: "Replicanti multiplier power", replicationdtgain: "Dilated Time gain from Replicanti",
+  replicationglyphlevel: "Replicanti factor for Glyph level", infinitypow: "Infinity Dimension power",
+  infinityrate: "Infinity Power conversion rate", infinityIP: "Infinity Point gain", infinityinfmult: "Infinity gain",
+  powerpow: "Antimatter Dimension power", powermult: "Antimatter Dimension multipliers",
+  powerdimboost: "Dimension Boost multiplier", powerbuy10: "Bonus from buying 10 Antimatter Dimensions"
+};
+const $ = (s) => document.querySelector(s);
+const parseSeedInput = (t) => {
+  const n = Number(String(t).trim());
+  return Number.isSafeInteger(n) && n > 0 && (n | 0) !== 0 ? n : null;
+};
+const SLOT = {
+  17: [0, "AD mult"], 16: [1, "AD pow"], 18: [2, "DB mult Mult"], 19: [3, "Buy10 mult Mult"],
+  13: [0, "IPow Conversion"], 12: [1, "ID pow"], 14: [2, "IP gain mult"], 15: [3, "Inf gain mult"],
+  9: [0, "R. mult pow"], 8: [1, "R. spd"], 10: [2, "xDT per log(R)/10k"], 11: [3, "R. GL Factor"],
+  1: [0, "Game spd mult"], 0: [1, "TD pow"], 2: [2, "Ete gain mult"], 3: [3, "EP gain mult"],
+  5: [0, "TG threshold mult"], 4: [1, "xDT"], 6: [2, "TT gen"], 7: [3, "AD pow in dilation"]
+};
+const NAMES = { power: "Power", infinity: "Infinity", replication: "Repli.", time: "Time", dilation: "Dilation" };
+const opts = { perm: false, bust: false, guar: false };
+const strengthOf = (g) => g.strength;
+const glyph = (type, strength, pct, effects, tier, boosted, guaranteed = -1, busted = []) => {
+  const items = effects.map((i) => [i, [opts.perm && i === guaranteed ? "perm" : "", opts.guar && i === DIM_POWER_BY_TYPE[type] ? "pow" : ""].filter(Boolean).join(" ")]).concat(opts.bust ? busted.map((i) => [i, "bust"]) : []);
+  const labels = items.map(([i, c]) => `<span class="s s${SLOT[i][0]} ${c}" title="${EFFECT_NAMES[i]}">${SLOT[i][1]}</span>`).join("");
+  return `<div class="glyph">${labels}<div class="mid">${hex(type, strength, pct, items.map(([i, c]) => [SLOT[i][0], c]))}<div class="gn"><b>${NAMES[type]}</b><small>${tier}</small></div></div></div>`;
+};
+const SYMBOLS = { power: "Ω", infinity: "∞", replication: "Ξ", time: "Δ", dilation: "Ψ" };
+const hex = (type, strength, pct, slots = []) =>
+  `<span class="hex ${type}" style="--t:var(--${type});--r:var(--${rarityName(strength).toLowerCase()})"><span><i>${slots.map(([s, c]) => `<u class="d d${s} ${c}"></u>`).join("")}${SYMBOLS[type]}</i><b>${pct}</b></span></span>`;
+
+const fixFrom = (text) => {
+  const n = Number(text);
+  return Number.isInteger(n) && n >= 1 && n <= 21 ? n : 1;
+};
+const fixLevel = (text) => {
+  const n = Number(text);
+  if (!Number.isInteger(n) || n < 1) return 1;
+  return Math.min(n, 1000000);
+};
+const readFrom = () => fixFrom($("#oFrom").value);
+const readLevel = () => fixLevel($("#lvl").value);
+const bindNumber = (selector, fix) => {
+  const el = $(selector);
+  const apply = (final) => {
+    if (el.value !== "" || final) {
+      const fixed = String(fix(el.value));
+      if (el.value !== fixed) el.value = fixed;
+    }
+    if (lastSeed) render(lastSeed);
+  };
+  el.addEventListener("input", () => apply(false));
+  el.addEventListener("change", () => apply(true));
+};
+let lastSeed = null;
+function render(seed) {
+  lastSeed = seed;
+  opts.perm = $("#oPerm").checked;
+  opts.guar = $("#oGuar").checked;
+  opts.bust = $("#oBust").checked;
+  DISPARITY_FROM = $("#oRU16").checked ? readFrom() : Infinity;
+  RU17_FROM = $("#oRU17").checked ? 2 : Infinity;
+  GLYPH_LEVEL = readLevel();
+  const rows = firstRealities(seed).map((r) => {
+    if (r.fixed) {
+      return `<section class="reality"><div class="rhead"><h2>Reality 1</h2><span>Fixed starting glyph</span></div>
+        <div class="glyphs">${glyph("power", r.fixed.strength, formatRarity(r.fixed.strength), r.fixed.effects, rarityName(r.fixed.strength), false)}
+        </div></section>`;
+    }
+    const glyphs = r.glyphs.map((g) => glyph(g.type, strengthOf(g), formatRarity(strengthOf(g)), g.effects, rarityName(strengthOf(g)), g.boosted, g.guaranteed, g.busted)
+
+      ).join("");
+    return `<section class="reality"><div class="rhead"><h2>Reality ${r.reality}</h2>
+      <span class="seed">seed ${r.seedBefore}</span><span class="seed gauss">secondGaussian ${r.gaussBefore}</span></div><div class="glyphs">${glyphs}</div></section>`;
+  });
+  $("#out").innerHTML = rows.join("");
+}
+
+bindNumber("#oFrom", fixFrom);
+bindNumber("#lvl", fixLevel);
+const DECO_CHARS = ["Ω", "Ξ", "Ψ", "∞", "Δ"];
+const DECO_X = [-5, 78, 30, 62, -3, 85, 45, 10, 70, 20];
+const DECO_SIZE = [46, 40, 32, 48, 38, 42, 34, 44, 36, 40];
+const DECO_TILT = [-10, 12, 6, -8, 14, -5, 9, -13, 7, -3];
+const fillDeco = () => {
+  const deco = $(".deco");
+  const need = Math.ceil(document.body.scrollHeight / 600) + 1;
+  for (let i = deco.children.length; i < need; i++) {
+    const s = document.createElement("span");
+    const k = i % 10;
+    const dir = i % 2 ? 1 : -1;
+    s.textContent = DECO_CHARS[i % 5];
+    s.style.cssText = `left:${DECO_X[k]}%;top:${i * 600 + ((i * 137) % 160)}px;font-size:${DECO_SIZE[k]}vmin;` +
+      `--r0:${DECO_TILT[k]}deg;--r1:${DECO_TILT[k] + dir * 8}deg;--dx:${dir * (6 + ((i * 5) % 6))}vmin;--dy:${((i % 3) + 1) * 3}vmin;` +
+      `--dur:${200 + ((i * 47) % 140)}s;animation-delay:-${(i * 61) % 200}s`;
+    deco.appendChild(s);
+  }
+};
+fillDeco();
+window.addEventListener("resize", fillDeco);
+if (typeof ResizeObserver === "function") new ResizeObserver(fillDeco).observe(document.body);
+const lightFor = (hue) => {
+  const h = ((hue % 360) + 360) % 360;
+  const d = Math.min(Math.abs(h - 100), 360 - Math.abs(h - 100));
+  return Math.round(40 - 9 * Math.exp(-(d * d) / (2 * 55 * 55)));
+};
+const setHue = (hue) => {
+  const st = document.documentElement.style;
+  st.setProperty("--h", hue);
+  st.setProperty("--l", lightFor(Number(hue)));
+  st.setProperty("--l2", lightFor(Number(hue) + 45));
+};
+$("#hue").addEventListener("input", (e) => setHue(e.target.value));
+$("#advBtn").addEventListener("click", () => {
+  const open = $("#advPanel").classList.toggle("open");
+  $("#advBtn").setAttribute("aria-expanded", open);
+});
+for (const id of ["#oPerm", "#oBust", "#oGuar", "#oRU16", "#oRU17"]) $(id).addEventListener("change", () => { if (lastSeed) render(lastSeed); });
+$("#f").addEventListener("submit", (e) => {
+  e.preventDefault();
+  const seed = parseSeedInput($("#seed").value);
+  if (seed === null) {
+    $("#msg").textContent = "Invalid seed";
+    $("#out").innerHTML = "";
+    return;
+  }
+  $("#msg").textContent = "";
+  render(seed);
+});
+</script>
+</body>
+</html>
